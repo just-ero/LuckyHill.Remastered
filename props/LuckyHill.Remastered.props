@@ -1,0 +1,10 @@
+<Project>
+
+  <Import Project="LuckyHill.Remastered.Paths.props" />
+
+  <PropertyGroup>
+    <ReadOnlyProject>true</ReadOnlyProject>
+    <ReplaceWildcardsInProjectItems>true</ReplaceWildcardsInProjectItems>
+  </PropertyGroup>
+
+</Project>

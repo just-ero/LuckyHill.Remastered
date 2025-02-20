@@ -1,0 +1,21 @@
+<Project>
+
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)/LuckyHill.Remastered.Debug.props"
+          Condition="'$(Configuration)' == 'Debug'" />
+
+  <Import Project="$(MSBuildThisFileDirectory)/LuckyHill.Remastered.Release.props"
+          Condition="'$(Configuration)' == 'Release'" />
+
+</Project>

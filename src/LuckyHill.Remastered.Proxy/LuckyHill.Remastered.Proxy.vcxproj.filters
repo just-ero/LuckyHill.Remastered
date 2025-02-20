@@ -1,0 +1,11 @@
+<Project>
+
+  <ItemGroup>
+    <Filter Include="src" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ClCompile Include="**/*.cpp" Filter="src" />
+  </ItemGroup>
+
+</Project>

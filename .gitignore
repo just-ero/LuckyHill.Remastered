@@ -1,0 +1,16 @@
+# IDE options/cache directories
+.vs/
+.vscode/
+.fleet/
+.idea/
+
+# Build results
+x64/
+x86/
+*.log
+
+# User-specific files
+*.user
+
+# LuckyHill.Remastered
+lib/sdk/

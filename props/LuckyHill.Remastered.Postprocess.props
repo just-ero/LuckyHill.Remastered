@@ -1,0 +1,31 @@
+<Project>
+
+  <ItemGroup>
+    <ClCompile Include="**/*.cpp" />
+    <ClCompile Include="@(Compile)" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <_IncludeDirectories>@(IncludeDirectory)</_IncludeDirectories>
+    <_AdditionalOptions>@(CompilationOption->'/%(Identity)', ' ')</_AdditionalOptions>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(_IncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>$(_AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup>
+    <Link>
+      <SubSystem>$(Subsystem)</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <Import Project="$(VCTargetsPath)/Microsoft.Cpp.Default.props" />
+  <Import Project="$(VCTargetsPath)/Microsoft.Cpp.props" />
+  <Import Project="$(UserRootDir)/Microsoft.Cpp.$(Platform).user.props" Condition="Exists('$(UserRootDir)/Microsoft.Cpp.$(Platform).user.props')" />
+  <Import Project="$(VCTargetsPath)/Microsoft.Cpp.targets" />
+
+</Project>

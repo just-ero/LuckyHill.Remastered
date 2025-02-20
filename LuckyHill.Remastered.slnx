@@ -1,0 +1,10 @@
+<Solution>
+
+  <Folder Name="/src/">
+    <Project Path="src/LuckyHill.Remastered/LuckyHill.Remastered.vcxproj" />
+    <Project Path="src/LuckyHill.Remastered.Proxy/LuckyHill.Remastered.Proxy.vcxproj">
+      <BuildDependency Project="src/LuckyHill.Remastered/LuckyHill.Remastered.vcxproj" />
+    </Project>
+  </Folder>
+
+</Solution>

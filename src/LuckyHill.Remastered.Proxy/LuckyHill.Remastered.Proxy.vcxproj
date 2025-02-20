@@ -1,0 +1,30 @@
+<Project>
+
+  <Import Project="$(SolutionDir)/props/LuckyHill.Remastered.props" />
+  <Import Project="$(PropsDir)/LuckyHill.Remastered.Preprocess.props" />
+
+  <Import Project="$(VCTargetsPath)/BuildCustomizations/masm.props" />
+
+  <PropertyGroup>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <SubSystem>Console</SubSystem>
+
+    <TargetName>dxgi</TargetName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <MASM Include="dxgi.asm" />
+    <None Include="dxgi.def" />
+  </ItemGroup>
+
+  <ItemDefinitionGroup>
+    <Link>
+      <ModuleDefinitionFile>dxgi.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <Import Project="$(VCTargetsPath)/BuildCustomizations/masm.targets" />
+
+  <Import Project="$(PropsDir)/LuckyHill.Remastered.Postprocess.props" />
+
+</Project>

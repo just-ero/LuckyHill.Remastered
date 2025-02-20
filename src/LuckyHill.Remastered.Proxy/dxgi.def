@@ -1,0 +1,22 @@
+LIBRARY dxgi
+EXPORTS
+  ApplyCompatResolutionQuirking=f0 @1
+  CompatString=f1 @2
+  CompatValue=f2 @3
+  CreateDXGIFactory=f3 @4
+  CreateDXGIFactory1=f4 @5
+  CreateDXGIFactory2=f5 @6
+  DXGID3D10CreateDevice=f6 @7
+  DXGID3D10CreateLayeredDevice=f7 @8
+  DXGID3D10GetLayeredDeviceSize=f8 @9
+  DXGID3D10RegisterLayers=f9 @10
+  DXGIDeclareAdapterRemovalSupport=f10 @11
+  DXGIDisableVBlankVirtualization=f11 @12
+  DXGIDumpJournal=f12 @13
+  DXGIGetDebugInterface1=f13 @14
+  DXGIReportAdapterConfiguration=f14 @15
+  PIXBeginCapture=f15 @16
+  PIXEndCapture=f16 @17
+  PIXGetCaptureState=f17 @18
+  SetAppCompatStringPointer=f18 @19
+  UpdateHMDEmulationStatus=f19 @20

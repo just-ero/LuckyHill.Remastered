@@ -1,0 +1,11 @@
+<Project>
+
+  <PropertyGroup>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <!-- Nothing for now. -->
+  </ItemDefinitionGroup>
+
+</Project>

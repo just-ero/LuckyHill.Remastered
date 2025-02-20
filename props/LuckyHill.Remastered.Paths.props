@@ -1,0 +1,13 @@
+<Project>
+
+  <PropertyGroup>
+    <RootDir>$(MSBuildThisFileDirectory)/..</RootDir>
+
+    <LibDir>$(RootDir)/lib</LibDir>
+    <PropsDir>$(RootDir)/props</PropsDir>
+    <SrcDir>$(RootDir)/src</SrcDir>
+
+    <OutDir>$(RootDir)/$(Platform)/$(Configuration)</OutDir>
+  </PropertyGroup>
+
+</Project>

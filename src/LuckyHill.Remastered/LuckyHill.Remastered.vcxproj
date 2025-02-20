@@ -1,0 +1,34 @@
+<Project>
+
+  <Import Project="$(SolutionDir)/props/LuckyHill.Remastered.props" />
+  <Import Project="$(PropsDir)/LuckyHill.Remastered.Preprocess.props" />
+
+  <PropertyGroup>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <SubSystem>Windows</SubSystem>
+
+    <OutDir>$(OutDir)/mods</OutDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(LibDir)/minhook/src/**/*.c" />
+
+    <Compile Include="$(LibDir)/sdk/SDK/Basic.cpp" />
+    <Compile Include="$(LibDir)/sdk/SDK/CoreUObject_functions.cpp" />
+    <Compile Include="$(LibDir)/sdk/SDK/Engine_functions.cpp" />
+    <Compile Include="$(LibDir)/sdk/SDK/PriOW_GallowNoose_BP_functions.cpp" />
+    <Compile Include="$(LibDir)/sdk/SDK/SHProto_functions.cpp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <IncludeDirectory Include="$(LibDir)/sdk" />
+    <IncludeDirectory Include="$(LibDir)/minhook/include" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <CompilationOption Include="bigobj" />
+  </ItemGroup>
+
+  <Import Project="$(PropsDir)/LuckyHill.Remastered.Postprocess.props" />
+
+</Project>
