@@ -16,7 +16,6 @@
     <Compile Include="$(LibDir)/sdk/SDK/Basic.cpp" />
     <Compile Include="$(LibDir)/sdk/SDK/CoreUObject_functions.cpp" />
     <Compile Include="$(LibDir)/sdk/SDK/Engine_functions.cpp" />
-    <Compile Include="$(LibDir)/sdk/SDK/PriOW_GallowNoose_BP_functions.cpp" />
     <Compile Include="$(LibDir)/sdk/SDK/SHProto_functions.cpp" />
   </ItemGroup>
 

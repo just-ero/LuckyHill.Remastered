@@ -1,7 +1,6 @@
 #include <SDK.hpp>
 #include <MinHook.h>
 
-#include <thread>
 #include <windows.h>
 
 #undef DrawText
@@ -10,10 +9,10 @@ constexpr SDK::FLinearColor GallowsColor = { 0.08, 0.25, 0.15, 1 };
 constexpr SDK::FLinearColor PinpadColor = { 0.05, 0.18, 0.10, 1 };
 
 typedef void(__thiscall* ProcessEvent)(SDK::UObject*, SDK::UFunction*, void*);
-typedef void(__thiscall* PostRender_H)(SDK::AHUD*);
+typedef void(__thiscall* PostRender)(SDK::AHUD*);
 
 ProcessEvent s_oProcessEvent = nullptr;
-PostRender_H s_oHudPostRender = nullptr;
+PostRender s_oHudPostRender = nullptr;
 
 std::vector<SDK::TWeakObjectPtr<SDK::APinpad_3Digits_BP_C>> s_Pinpads;
 std::vector<SDK::TWeakObjectPtr<SDK::AGallowsPuzzle_BP_C>> s_Gallows;
@@ -88,19 +87,19 @@ void DrawBoxAroundComponent(SDK::AHUD* hud, const SDK::UStaticMeshComponent* com
     hud->DrawLine(projectedCorners[3].X, projectedCorners[3].Y, projectedCorners[0].X, projectedCorners[0].Y, borderColor, borderThickness);
 }
 
-SDK::UStaticMeshComponent* GetPinpadLight(const int num, const SDK::APinpad_3Digits_BP_C* pinPad)
+SDK::UStaticMeshComponent* GetPinpadLight(const int num, const SDK::APinpad_3Digits_BP_C* pinpad)
 {
     switch (num)
     {
-    case 0: return pinPad->PinPadButtonLight_01_A;
-    case 1: return pinPad->PinPadButtonLight_02_A;
-    case 2: return pinPad->PinPadButtonLight_03_A;
+    case 0: return pinpad->PinPadButtonLight_01_A;
+    case 1: return pinpad->PinPadButtonLight_02_A;
+    case 2: return pinpad->PinPadButtonLight_03_A;
     }
 
     return nullptr;
 }
 
-void HighlightPinPad(const SDK::APinpad_3Digits_BP_C* pinpad, SDK::AHUD* hud)
+void HighlightPinpad(const SDK::APinpad_3Digits_BP_C* pinpad, SDK::AHUD* hud)
 {
     for (auto i = 0; i < pinpad->RandomizedRequiredCode.Num(); ++i)
     {
@@ -120,14 +119,6 @@ void HighlightPinPad(const SDK::APinpad_3Digits_BP_C* pinpad, SDK::AHUD* hud)
 
         hud->DrawText(fString, PinpadColor, textDrawX, textDrawY, nullptr, 5, false);
     }
-}
-
-void ShowText(SDK::AHUD* hud, int value, int x, int y)
-{
-    const auto str = std::to_wstring(value);
-    const auto fStr = SDK::FString(str);
-
-    hud->DrawText(fStr, { 1, 0, 0, 1 }, x, y, nullptr, 2, false);
 }
 
 void DrawGallows(SDK::AHUD* hud)
@@ -181,7 +172,7 @@ void DrawPinPad(SDK::AHUD* hud)
         const auto pinpad = pinPadWeak.Get();
         if (pinpad->SHFocusable->IsShown())
         {
-            HighlightPinPad(pinpad, hud);
+            HighlightPinpad(pinpad, hud);
         }
     }
 }
@@ -211,12 +202,12 @@ void TryHookHud(const SDK::ULocalPlayer* player)
     const auto hudVtable = player->PlayerController->MyHUD->VTable;
 
     DWORD hudProtect = 0;
-    VirtualProtect(&hudVtable[SDK::Offsets::HUDPostRenderIdx], sizeof(void*), PAGE_EXECUTE_READWRITE, &hudProtect);
+    VirtualProtect(&hudVtable[SDK::Offsets::HudPostRenderIdx], sizeof(void*), PAGE_EXECUTE_READWRITE, &hudProtect);
 
-    s_oHudPostRender = reinterpret_cast<decltype(s_oHudPostRender)>(hudVtable[SDK::Offsets::HUDPostRenderIdx]);
-    hudVtable[SDK::Offsets::HUDPostRenderIdx] = &HudPostRenderHook;
+    s_oHudPostRender = reinterpret_cast<decltype(s_oHudPostRender)>(hudVtable[SDK::Offsets::HudPostRenderIdx]);
+    hudVtable[SDK::Offsets::HudPostRenderIdx] = &HudPostRenderHook;
 
-    VirtualProtect(&hudVtable[SDK::Offsets::HUDPostRenderIdx], sizeof(void*), hudProtect, NULL);
+    VirtualProtect(&hudVtable[SDK::Offsets::HudPostRenderIdx], sizeof(void*), hudProtect, NULL);
 
     s_HudReady = true;
 }

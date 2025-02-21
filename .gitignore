@@ -13,4 +13,5 @@ x86/
 *.user
 
 # LuckyHill.Remastered
-lib/sdk/
+lib/
+!lib/minhook/
